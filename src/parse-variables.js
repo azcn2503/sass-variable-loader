@@ -1,4 +1,4 @@
-import sass from 'node-sass';
+import sass from 'sass';
 import camelCase from 'lodash.camelcase';
 
 function constructSassString(variables) {
@@ -15,23 +15,24 @@ function constructSassString(variables) {
 export default function parseVariables(variables, opts = {}) {
   const result = sass.renderSync({
     data: constructSassString(variables),
-    outputStyle: 'compact',
+    outputStyle: 'compressed',
   }).css.toString();
 
-  const parsedVariables = result.split(/\n/)
-    .filter(line => line && line.length)
-    .map(variable => {
-      const [, name, value] = /\.(.+) { value: (.+); }/.exec(variable);
-      const obj = {};
+  const h = result.split('.')
+    .filter(line => line && line.length);
 
-      if (opts.preserveVariableNames) {
-        obj[name] = value;
-        return obj;
-      }
+  const parsedVariables = h.map(variable => {
+    const [, name, value] = /(.+){value:(.+)}/.exec(variable);
+    const obj = {};
 
-      obj[camelCase(name)] = value;
+    if (opts.preserveVariableNames) {
+      obj[name] = value;
       return obj;
-    });
+    }
+
+    obj[camelCase(name)] = value;
+    return obj;
+  });
 
   if (!parsedVariables.length) {
     return {};
