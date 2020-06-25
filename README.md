@@ -1,4 +1,4 @@
-# Sass variable loader for webpack
+# Sass variable loader for webpack, using the Dart Sass compiler
 
 > Parses your Sass variables and returns an object containing each variable camelCased and the end value as it would be in CSS.
 >
