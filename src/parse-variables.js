@@ -18,21 +18,20 @@ export default function parseVariables(variables, opts = {}) {
     outputStyle: 'compressed',
   }).css.toString();
 
-  const h = result.split('.')
-    .filter(line => line && line.length);
+  const parsedVariables = result.split('.')
+    .filter(line => line && line.length)
+    .map(variable => {
+      const [, name, value] = /(.+){value:(.+)}/.exec(variable);
+      const obj = {};
 
-  const parsedVariables = h.map(variable => {
-    const [, name, value] = /(.+){value:(.+)}/.exec(variable);
-    const obj = {};
+      if (opts.preserveVariableNames) {
+        obj[name] = value;
+        return obj;
+      }
 
-    if (opts.preserveVariableNames) {
-      obj[name] = value;
+      obj[camelCase(name)] = value;
       return obj;
-    }
-
-    obj[camelCase(name)] = value;
-    return obj;
-  });
+    });
 
   if (!parsedVariables.length) {
     return {};
