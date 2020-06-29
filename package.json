@@ -9,7 +9,7 @@
     "test": "mocha --compilers js:babel-core/register",
     "lint": "eslint --ext=.js ./src",
     "prepush": "npm run lint && npm run test",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "postpublish": "rimraf dist && git push --follow-tags"
   },
   "repository": {
