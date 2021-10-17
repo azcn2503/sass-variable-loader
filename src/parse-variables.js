@@ -1,27 +1,32 @@
-import sass from 'sass';
-import camelCase from 'lodash.camelcase';
+import sass from "sass";
+import camelCase from "lodash.camelcase";
 
 function constructSassString(variables) {
   const asVariables = variables
     .map(variable => `$${variable.name}: ${variable.value};`)
-    .join('\n');
+    .join("\n");
   const asClasses = variables
     .map(variable => `.${variable.name} { value: ${variable.value} }`)
-    .join('\n');
+    .join("\n");
 
   return `${asVariables}\n${asClasses}`;
 }
 
 export default function parseVariables(variables, opts = {}) {
-  const result = sass.renderSync({
-    data: constructSassString(variables),
-    outputStyle: 'compressed',
-  }).css.toString();
+  const result = sass
+    .renderSync({
+      data: constructSassString(variables),
+      outputStyle: "compressed"
+    })
+    .css.toString();
 
-  const parsedVariables = result.split('.')
+  const parsedVariables = result
+    .split(".")
     .filter(line => line && line.length)
     .map(variable => {
-      const [, name, value] = /(.+){value:(.+)}/.exec(variable);
+      const match = /(.+){value:(.+)}/.exec(variable) || [];
+      if (!match.length) return null;
+      const [, name, value] = match;
       const obj = {};
 
       if (opts.preserveVariableNames) {
@@ -31,7 +36,8 @@ export default function parseVariables(variables, opts = {}) {
 
       obj[camelCase(name)] = value;
       return obj;
-    });
+    })
+    .filter(Boolean);
 
   if (!parsedVariables.length) {
     return {};

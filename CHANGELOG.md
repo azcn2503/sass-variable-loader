@@ -1,5 +1,8 @@
 # Changelog
 
+# v 0.1.3
+* fix invalid attempt to destructure non-iterable instance error.
+
 # v 0.1.2
 * fix loader-utils deprecation #11
 
