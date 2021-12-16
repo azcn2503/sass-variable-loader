@@ -20,8 +20,7 @@ export default function parseVariables(variables, opts = {}) {
     })
     .css.toString();
 
-  const parsedVariables = result
-    .split(".")
+  const parsedVariables = (result.match(/\..+?}/g) || [])
     .filter(line => line && line.length)
     .map(variable => {
       const match = /(.+){value:(.+)}/.exec(variable) || [];
@@ -30,7 +29,7 @@ export default function parseVariables(variables, opts = {}) {
       const obj = {};
 
       if (opts.preserveVariableNames) {
-        obj[name] = value;
+        obj[name.replace(/^\./, "")] = value;
         return obj;
       }
 
