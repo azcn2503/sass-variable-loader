@@ -23,8 +23,7 @@ export default function parseVariables(variables, opts = {}) {
   const parsedVariables = (result.match(/\..+?}/g) || [])
     .filter(line => line && line.length)
     .map(variable => {
-      const match = /(.+){value:(.+)}/.exec(variable) || [];
-      if (!match.length) return null;
+      const match = /(.+){value:(.+)}/.exec(variable);
       const [, name, value] = match;
       const obj = {};
 
