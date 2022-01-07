@@ -1,4 +1,4 @@
-[![Coverage Status](https://coveralls.io/repos/github/azcn2503/sass-variable-loader/badge.svg?branch=upgrade)](https://coveralls.io/github/azcn2503/sass-variable-loader?branch=upgrade)
+[![codecov](https://codecov.io/gh/azcn2503/sass-variable-loader/branch/test/codecov/graph/badge.svg?token=5ICT5RAZ0J)](https://codecov.io/gh/azcn2503/sass-variable-loader)
 
 # Sass variable loader for webpack, using the Dart Sass compiler
 
