@@ -7,7 +7,7 @@ orbs:
   # Orbs reduce the amount of configuration required for common tasks.
   # See the orb documentation here: https://circleci.com/developer/orbs/orb/circleci/node
   node: circleci/node@4.7
-  coveralls: coveralls/coveralls@1.0.6
+  codecov: codecov/codecov@3.2.2
 
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
@@ -30,7 +30,7 @@ jobs:
       - run:
           name: Run tests
           command: yarn test
-      - coveralls/upload
+      - codecov/upload
 
 workflows:
   # Below is the definition of your workflow.
