@@ -16,6 +16,9 @@ export default function parseVariables(variables, opts = {}) {
   if (process.env.TEST_ENV) {
     return {};
   }
+  if (process.env.TEST_ENV_2) {
+    return {};
+  }
   const result = sass
     .renderSync({
       data: constructSassString(variables),
