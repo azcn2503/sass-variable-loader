@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rimraf dist",
     "build": "babel ./src -d ./dist",
-    "test": "mocha --compilers js:babel-core/register",
+    "test": "jest",
     "lint": "eslint --ext=.js ./src",
     "prepush": "npm run lint && npm run test",
     "prepare": "npm run build",
@@ -36,17 +36,19 @@
     "strip-json-comments": "^2.0.1"
   },
   "devDependencies": {
-    "babel": "^6.3.26",
-    "babel-cli": "^6.4.0",
-    "babel-core": "^6.4.0",
+    "@babel/cli": "^7.16.7",
+    "@babel/core": "^7.16.7",
+    "@babel/preset-env": "^7.16.7",
+    "@types/jest": "^27.4.0",
     "babel-eslint": "^10.1.0",
-    "babel-preset-es2015": "^6.3.13",
-    "chai": "^3.4.1",
+    "babel-jest": "^27.4.6",
+    "coveralls": "^3.1.1",
     "eslint-config-airbnb-base": "^5.0.0",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-import": "^1.11.1",
     "husky": "^0.10.2",
-    "mocha": "^2.3.4",
+    "jest": "^27.4.7",
+    "jest-extended": "^1.2.0",
     "rimraf": "^2.5.0"
   }
 }
