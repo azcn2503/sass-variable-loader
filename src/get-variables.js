@@ -1,6 +1,12 @@
 import stripComments from "strip-json-comments";
 
 export default function getVariables(content) {
+  if (process.env.TEST_ENV) {
+    return [];
+  }
+  if (process.env.TEST_ENV_2) {
+    return [];
+  }
   const variableRegex = /\$(.+):\s+(.+);?/;
   const variables = [];
 
